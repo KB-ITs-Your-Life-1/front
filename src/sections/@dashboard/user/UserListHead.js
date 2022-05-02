@@ -42,31 +42,27 @@ export default function UserListHead({
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-          />
-        </TableCell>
+        <TableCell> </TableCell>
         {headLabel.map((headCell) => (
           <TableCell
-            key={headCell.id}
-            align={headCell.alignRight ? 'right' : 'left'}
-            sortDirection={orderBy === headCell.id ? order : false}
+            // key={headCell.id}
+            // align={headCell.alignRight ? 'right' : 'left'}
+            // sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
-              hideSortIcon
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
+            {/* <TableCell
+              // hideSortIcon
+              // active={orderBy === headCell.id}
+              // direction={orderBy === headCell.id ? order : 'asc'}
+              // onClick={createSortHandler(headCell.id)}
+            > */}
               {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box sx={{ ...visuallyHidden }}>{order === 'desc' ? 'sorted descending' : 'sorted ascending'}</Box>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
+              {/* {orderBy === headCell.id ? ( */}
+                <Box>
+                  {/* sx={{ ...visuallyHidden }}>{order === 'desc' ? 'sorted descending' : 'sorted ascending'} */}
+                  </Box>
+              {/* ) : null} */}
+            </TableCell>
+          // </TableCell>
         ))}
       </TableRow>
     </TableHead>
