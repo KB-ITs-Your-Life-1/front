@@ -32,6 +32,8 @@ import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
 import LaptopIcon from '@material-ui/icons/Laptop';
 import TvIcon from '@material-ui/icons/Tv';
 import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Page from '../components/Page';
 import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
@@ -98,7 +100,7 @@ export default function MediInfo() {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const [formats, setFormats] = useState({shape:'ALL', color:'ALL', fomula:'ALL',dividing:'ALL'});
+  // const [formats, setFormats] = useState({shape:'ALL', color:'ALL', fomula:'ALL',dividing:'ALL'});
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -143,10 +145,30 @@ export default function MediInfo() {
     setFilterName(event.target.value);
   };
 
+  // Toggle function
+  const useStyles = makeStyles((theme) => ({
+    toggleContainer: {
+      margin: theme.spacing(2, 0),
+    },
+  }));
+
+  const [alignment, setAlignment] = useState('left');
+  const [formats, setFormats] = useState(() => ['phone']);
+
   const handleFormat = (event, newFormats) => {
-    
-    setFormats(newFormats);
+    console.log(newFormats);
+    if (newFormats.length) {
+      setFormats(newFormats);
+    }
   };
+
+  const handleAlignment = (event, newAlignment) => {
+    if (newAlignment !== null) {
+      setAlignment(newAlignment);
+    }
+  };
+
+  const classes = useStyles();
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
 
@@ -166,25 +188,43 @@ export default function MediInfo() {
           </Button>
         </Stack>
 
-        <Stack spacing={3}>
-          {/* <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}> 
-
-          <ToggleButtonGroup value={formats} onChange={handleFormat} aria-label="text formatting">
-          <ToggleButton value="shape" aria-label="shape">
-            <LaptopIcon  />
-          </ToggleButton>
-          <ToggleButton value="color" aria-label="color">
-            <TvIcon  />
-          </ToggleButton>
-          <ToggleButton value="fomula" aria-label="fomula">
-            <PhoneAndroidIcon  />
-          </ToggleButton>
-          <ToggleButton value="dividing" aria-label="dividing">
-            <PhoneAndroidIcon />
-          </ToggleButton>
-        </ToggleButtonGroup>
-                 */}   
-        </Stack>
+        <Grid container direction="column" spacing={2}>
+      <Grid item sm={10} md={6}>
+        <div className={classes.toggleContainer}>
+          <ToggleButtonGroup
+            value={alignment}
+            exclusive
+            onChange={handleAlignment}
+            aria-label="text alignment"
+          >
+            <ToggleButton value="left" aria-label="left aligned">
+              <PhoneAndroidIcon />
+            </ToggleButton>
+            <ToggleButton value="center" aria-label="centered">
+              <PhoneAndroidIcon />
+            </ToggleButton>
+            <ToggleButton value="right" aria-label="right aligned">
+              <PhoneAndroidIcon />
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </div>
+      </Grid>
+      <Grid item sm={12} md={6}>
+        <div className={classes.toggleContainer}>
+          <ToggleButtonGroup value={formats} onChange={handleFormat} aria-label="device">
+            <ToggleButton value="laptop" aria-label="laptop">
+              <LaptopIcon />
+            </ToggleButton>
+            <ToggleButton value="tv" aria-label="tv">
+              <TvIcon />
+            </ToggleButton>
+            <ToggleButton value="phone" aria-label="phone">
+              <PhoneAndroidIcon />
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </div>
+      </Grid>
+    </Grid>
 
         <Card>
           <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
