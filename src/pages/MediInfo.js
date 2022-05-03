@@ -29,6 +29,7 @@ import FormatItalicIcon from '@material-ui/icons/FormatItalic';
 import FormatColorFillIcon from '@material-ui/icons/FormatColorFill';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
+import { deepOrange, deepPurple, green, pink, red, yellow } from '@mui/material/colors';
 import LaptopIcon from '@material-ui/icons/Laptop';
 import TvIcon from '@material-ui/icons/Tv';
 import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
@@ -163,6 +164,7 @@ export default function MediInfo() {
   };
 
   const handleAlignment = (event, newAlignment) => {
+    console.log(newAlignment);
     if (newAlignment !== null) {
       setAlignment(newAlignment);
     }
@@ -196,14 +198,23 @@ export default function MediInfo() {
             onChange={handleAlignment}
             aria-label="text alignment"
           >
-            <ToggleButton value="left" aria-label="left aligned">
-              <PhoneAndroidIcon />
+            <ToggleButton value="all" aria-label="left aligned">
+            <Avatar src={'/static/mock-images/avatars/avatar_default.jpg'} alt="photoURL" />
             </ToggleButton>
-            <ToggleButton value="center" aria-label="centered">
-              <PhoneAndroidIcon />
+            <ToggleButton value="yellow" aria-label="centered">
+            <Avatar sx={{ bgcolor: yellow[500], fontSize: "0.8rem"}}>노랑</Avatar>
             </ToggleButton>
-            <ToggleButton value="right" aria-label="right aligned">
-              <PhoneAndroidIcon />
+            <ToggleButton value="orange" aria-label="centered">
+            <Avatar sx={{ bgcolor: deepOrange[500], fontSize: "0.8rem"}}>주황</Avatar>
+            </ToggleButton>
+            <ToggleButton value="pink" aria-label="centered">
+            <Avatar sx={{ bgcolor: pink[200], fontSize: "0.8rem"}}>분홍</Avatar>
+            </ToggleButton>
+            <ToggleButton value="red" aria-label="centered">
+            <Avatar sx={{ bgcolor: red[500], fontSize: "0.8rem"}}>빨강</Avatar>
+            </ToggleButton>
+            <ToggleButton value="green" aria-label="right aligned">
+            <Avatar sx={{ bgcolor: green[500] , fontSize: "0.8rem"}}>초록</Avatar>
             </ToggleButton>
           </ToggleButtonGroup>
         </div>
