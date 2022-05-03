@@ -48,10 +48,10 @@ import USERLIST from '../_mock/user';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'name', label: '의약품', alignRight: false },
-  { id: 'role', label: '복용 날짜', alignRight: false },
-  { id: 'isVerified', label: '부작용', alignRight: false },
-  { id: 'status', label: '복용중', alignRight: false },
+  { id: 'name', label: '제품', alignRight: false },
+  { id: 'role', label: '외형정보', alignRight: false },
+  { id: 'isVerified', label: '효능　　　　　　　　　　　　　　　　　　　　　　　　　　　', alignRight: false },
+  { id: 'status', label: '', alignRight: false },
   { id: '' },
 ];
 
@@ -183,10 +183,9 @@ export default function MediInfo() {
           <Typography variant="h4" gutterBottom>
             Medi Info
           </Typography>
-          <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New Medicine
-          </Button>
         </Stack>
+        <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
+
 
         <Grid container direction="column" spacing={2}>
       <Grid item sm={10} md={6}>
@@ -227,8 +226,6 @@ export default function MediInfo() {
     </Grid>
 
         <Card>
-          <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
-
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
@@ -255,9 +252,7 @@ export default function MediInfo() {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, name)} />
-                        </TableCell>
+                        <TableCell> </TableCell>
                         <TableCell component="th" scope="row" padding="none">
                           <Stack direction="row" alignItems="center" spacing={2}>
                             <Avatar alt={name} src={avatarUrl} />
@@ -268,15 +263,7 @@ export default function MediInfo() {
                         </TableCell>
                         <TableCell align="left">{role}</TableCell>
                         <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
-                        <TableCell align="left">
-                          <Label variant="ghost" color={(status === 'banned' && 'error') || 'success'}>
-                            {sentenceCase(status)}
-                          </Label>
-                        </TableCell>
 
-                        <TableCell align="right">
-                          <UserMoreMenu />
-                        </TableCell>
                       </TableRow>
                     );
                   })}
