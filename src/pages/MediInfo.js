@@ -19,6 +19,19 @@ import {
   TablePagination,
 } from '@mui/material';
 // components
+import { LoadingButton } from '@mui/lab';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+// eslint-disable-next-line import/no-unresolved
+import FormatBoldIcon from '@material-ui/icons/FormatBold';
+import FormatItalicIcon from '@material-ui/icons/FormatItalic';
+import FormatColorFillIcon from '@material-ui/icons/FormatColorFill';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
+import LaptopIcon from '@material-ui/icons/Laptop';
+import TvIcon from '@material-ui/icons/Tv';
+import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 import Page from '../components/Page';
 import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
@@ -28,6 +41,8 @@ import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashbo
 // mock
 import USERLIST from '../_mock/user';
 
+// Button
+// import Button from '@material-ui/core/Button';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
@@ -70,6 +85,7 @@ function applySortFilter(array, comparator, query) {
 }
 
 export default function MediInfo() {
+  
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -81,6 +97,8 @@ export default function MediInfo() {
   const [filterName, setFilterName] = useState('');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const [formats, setFormats] = useState({shape:'ALL', color:'ALL', fomula:'ALL',dividing:'ALL'});
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -125,6 +143,11 @@ export default function MediInfo() {
     setFilterName(event.target.value);
   };
 
+  const handleFormat = (event, newFormats) => {
+    
+    setFormats(newFormats);
+  };
+
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
 
   const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
@@ -141,6 +164,26 @@ export default function MediInfo() {
           <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New Medicine
           </Button>
+        </Stack>
+
+        <Stack spacing={3}>
+          {/* <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}> 
+
+          <ToggleButtonGroup value={formats} onChange={handleFormat} aria-label="text formatting">
+          <ToggleButton value="shape" aria-label="shape">
+            <LaptopIcon  />
+          </ToggleButton>
+          <ToggleButton value="color" aria-label="color">
+            <TvIcon  />
+          </ToggleButton>
+          <ToggleButton value="fomula" aria-label="fomula">
+            <PhoneAndroidIcon  />
+          </ToggleButton>
+          <ToggleButton value="dividing" aria-label="dividing">
+            <PhoneAndroidIcon />
+          </ToggleButton>
+        </ToggleButtonGroup>
+                 */}   
         </Stack>
 
         <Card>
